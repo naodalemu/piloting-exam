@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserAnswer;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class UserAnswerSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        UserAnswer::factory()->create();
     }
 }

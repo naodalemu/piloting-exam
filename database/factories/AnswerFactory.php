@@ -20,7 +20,7 @@ class AnswerFactory extends Factory
         return [
             "answer_text" => fake()->sentence,
             "is_correct" => fake()->boolean,
-            "question_id" => Question::factory()
+            "question_id" => fake()->numberBetween(1, 30)
         ];
     }
 }

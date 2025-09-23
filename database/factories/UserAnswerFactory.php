@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Answer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class UserAnswerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "user_id" => fake()->numberBetween(1, 3),
+            "question_id" => fake()->numberBetween(1, 30),
+            "answer_id" => $answerId = fake()->numberBetween(1, 120),
+            "is_correct" => Answer::find($answerId)->is_correct
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Question;
 use App\Models\QuestionSection;
 use App\Models\User;
+use App\Models\UserAnswer;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

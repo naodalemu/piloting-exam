@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -48,7 +48,11 @@ class User extends Authenticatable
         ];
     }
 
-    public function questions() : BelongsToMany {
-        return $this->belongsToMany(Question::class, "user_answers");
+    public function questions() : HasMany {
+        return $this->hasMany(Question::class, "created_by");
+    }
+
+    public function userAnswers() : HasMany {
+        return $this->hasMany(UserAnswer::class);
     }
 }

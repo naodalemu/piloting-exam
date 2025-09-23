@@ -21,11 +21,11 @@ class Question extends Model
         return $this->belongsTo(questionSection::class);
     }
 
-    public function users() : BelongsToMany {
-        return $this->belongsToMany(User::class, "user_answers");
+    public function userAnswers() : HasMany {
+        return $this->hasMany(UserAnswer::class);
     }
 
     public function user() : BelongsTo {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, "created_by");
     }
 }

@@ -20,8 +20,8 @@ class QuestionFactory extends Factory
     {
         return [
             "question_text" => fake()->paragraph,
-            "created_by" => User::factory(),
-            "question_section_id" => QuestionSection::factory(),
+            "created_by" => $randomNum = fake()->numberBetween(1, 3),
+            "question_section_id" => $randomNum,
         ];
     }
 }
