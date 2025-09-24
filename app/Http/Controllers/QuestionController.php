@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
+use App\Models\Answer;
 use App\Models\Question;
 
 class QuestionController extends Controller
@@ -13,7 +14,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return view("questions.index", ["questions" => Question::all()]);
     }
 
     /**
@@ -37,7 +38,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return view("questions.show", ["question" => $question, "answers" => $question->answers]);
     }
 
     /**

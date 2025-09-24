@@ -18,7 +18,7 @@ class Question extends Model
     }
 
     public function questionSection() : BelongsTo {
-        return $this->belongsTo(questionSection::class);
+        return $this->belongsTo(QuestionSection::class);
     }
 
     public function userAnswers() : HasMany {
