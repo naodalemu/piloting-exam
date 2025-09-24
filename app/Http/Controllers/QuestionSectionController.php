@@ -13,7 +13,7 @@ class QuestionSectionController extends Controller
      */
     public function index()
     {
-        //
+        return view("welcome", ["questionSections" => QuestionSection::all()]);
     }
 
     /**
@@ -37,7 +37,7 @@ class QuestionSectionController extends Controller
      */
     public function show(QuestionSection $questionSection)
     {
-        //
+        return view("questionSections.index", ["questionSection" => $questionSection, "questions" => $questionSection->questions]);
     }
 
     /**
