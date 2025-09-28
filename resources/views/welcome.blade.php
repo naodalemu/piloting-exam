@@ -1,9 +1,17 @@
 <x-layout sectionHeader="Question Sections">
     @if ($questionSections->isEmpty())
         <div class="h-50 w-full flex items-end justify-center text-gray-500">
-            <p class="text-center">
-                There are no sections yet, please <br />
-                <a href="/create_question_section" class="text-gray-800 underline">Create Question Sections here</a>!
+            <p class="text-center max-w-lg">
+                There are no sections yet,
+                @auth
+                    please <br />
+                    <a href="/create_question_section" class="text-gray-800 underline">Create Question Sections here</a>!
+                @endauth
+                @guest
+                    please
+                    <a href="/login" class="text-gray-800 underline">Login</a> using an admin account to create
+                    question sections or contact admins!
+                @endguest
             </p>
         </div>
     @else

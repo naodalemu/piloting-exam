@@ -32,6 +32,7 @@ class RegisteredUserController extends Controller
         $validatedData = $request->validate([
             "name" => "required",
             "email" => "required|email|max:254|unique:users,email",
+            "role" => "required|in:user,admin",
             "password" => "required|confirmed"
         ]);
 

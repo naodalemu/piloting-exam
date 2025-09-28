@@ -1,9 +1,17 @@
 <x-layout sectionHeader="List of All Questions">
-    @if (!$questions)
+    @if ($questions->isEmpty())
         <div class="h-50 w-full flex items-end justify-center text-gray-500">
-            <p class="text-center">
-                There are no questions yet, please <br />
-                <a href="/create_question" class="text-gray-800 underline">Create Questions here</a>!
+            <p class="text-center max-w-lg">
+                There are no questions yet,
+                @auth
+                    please <br />
+                    <a href="/create_question" class="text-gray-800 underline">Create Questions here</a>!
+                @endauth
+                @guest
+                    please
+                    <a href="/login" class="text-gray-800 underline">Login</a> using an admin account to create
+                    questions or contact admins!
+                @endguest
             </p>
         </div>
     @else

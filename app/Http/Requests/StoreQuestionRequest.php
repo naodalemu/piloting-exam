@@ -12,11 +12,7 @@ class StoreQuestionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if (Auth::user()->id === 1) {
-            return true;
-        }
-
-        return false;
+        return Auth::check() && Auth::user()->role === "admin";
     }
 
     /**

@@ -27,14 +27,14 @@
                                     class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">Sections</a>
                                 <a href="/questions"
                                     class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('questions') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">Questions</a>
-                                @auth
+                                @if (Auth::user() && Auth::user()->role == "admin")
                                     <a href="/create_question_section"
                                         class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('create_question_section') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">Create
                                         Section</a>
                                     <a href="/create_question"
                                         class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('create_question') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">Create
                                         Question</a>
-                                @endauth
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                                         <form action="/logout" method="POST">
                                             @csrf
                                             @method("DELETE")
-                                            
+
                                             <button type="submit"
                                                 class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white cursor-pointer">Logout</button>
                                         </form>
