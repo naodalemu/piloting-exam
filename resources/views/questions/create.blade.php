@@ -32,19 +32,19 @@
                 <label class="block text-sm font-medium text-gray-700">Answers</label>
                 <div id="answers-container">
                     <div class="flex items-center mb-2">
-                        <input type="text" name="answers[0][answer_text]" placeholder="Answer Text"
+                        <input type="text" name="answers[0][answer_text]" placeholder="Answer Text" id="answers[0][answer_text]"
                             class="flex-1 rounded-md border-2 border-gray-500 focus:border-gray-900 px-3 py-2"
-                            value="{{ old('answer_text') }}">
-                        <input type="checkbox" name="answers[0][is_correct]" class="ml-4">
+                            value="{{ old('answers[0][answer_text]') }}">
+                        <input type="checkbox" name="answers[0][is_correct]" class="ml-4" id="answers[0][is_correct]">
                         <span class="ml-2 text-sm text-gray-700">Correct</span>
                     </div>
-                    @error('answers[0][answer_text]')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                    @enderror
-                    @error('answers[0][is_correct]')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                    @enderror
                 </div>
+                @error('answer_texts')
+                    <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                @enderror
+                @error('answers')
+                    <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                @enderror
                 <button type="button" id="add-answer"
                     class="mt-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-500">Add Answer</button>
             </div>

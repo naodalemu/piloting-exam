@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\QuestionSection;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -15,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view("questions.index", ["questions" => Question::all(), "questionSections" =>  QuestionSection::all()]);
+        return view("questions.index", ["questions" => Question::paginate(5), "questionSections" =>  QuestionSection::all()]);
     }
 
     /**
@@ -38,13 +39,13 @@ class QuestionController extends Controller
             "question_section_id" => "required|exists:question_sections,id",
             "answers" => "required|array|min:1",
             "answers.*.answer_text" => "required|string",
-            "answers.*.is_correct" => "required",
+            "answers.*.is_correct" => "required|boolean",
         ]);
 
         $question = Question::create([
             "question_text" => $validatedData["question_text"],
             "question_section_id" => $validatedData["question_section_id"],
-            "created_by" => "1"
+            "created_by" => Auth::user()->id
         ]);
 
         foreach ($validatedData["answers"] as $answerData) {

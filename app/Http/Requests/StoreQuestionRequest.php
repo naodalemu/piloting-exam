@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreQuestionRequest extends FormRequest
 {
@@ -11,7 +12,11 @@ class StoreQuestionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if (Auth::user()->id === 1) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -43,5 +48,25 @@ class StoreQuestionRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     */
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $answers = $this->input("answers", []);
+
+            $hasCorrectAnswer = collect($answers)->contains(fn($answer) => $answer['is_correct'] === true);
+            $hasText = collect($answers)->contains(fn($answer) => $answer['answer_text']);
+
+            if (!$hasCorrectAnswer) {
+                $validator->errors()->add('answers', 'At least one answer must be marked as correct.');
+            }
+            if (!$hasText) {
+                $validator->errors()->add('answer_texts', 'At least one answer must written.');
+            }
+        });
     }
 }
