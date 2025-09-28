@@ -14,6 +14,7 @@ class QuestionSectionController extends Controller
     public function index()
     {
         return view("welcome", ["questionSections" => QuestionSection::all()]);
+        // dd(QuestionSection::first()->questions[0]->answers[0]->answer_text);
     }
 
     /**
@@ -21,7 +22,7 @@ class QuestionSectionController extends Controller
      */
     public function create()
     {
-        //
+        return view("questionSections.create");
     }
 
     /**
@@ -29,7 +30,15 @@ class QuestionSectionController extends Controller
      */
     public function store(StoreQuestionSectionRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            "name" => "required",
+            "description" => "required|min:10|max:300",
+            "created_by" => "required",
+        ]);
+
+        QuestionSection::create($validatedData);
+
+        return redirect("/")->with(["success" => "Section Created Successfully!"]);
     }
 
     /**
@@ -37,6 +46,13 @@ class QuestionSectionController extends Controller
      */
     public function show(QuestionSection $questionSection)
     {
+        foreach ($questionSection->questions as $index => $question) {
+            foreach ($question->answers as $index => $answers) {
+                
+            }
+        }
+
+        // dd($questionSection->questions[0]->answers);
         return view("questionSections.index", ["questionSection" => $questionSection, "questions" => $questionSection->questions]);
     }
 

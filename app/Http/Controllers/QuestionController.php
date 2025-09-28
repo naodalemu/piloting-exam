@@ -6,6 +6,7 @@ use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Answer;
 use App\Models\Question;
+use App\Models\QuestionSection;
 
 class QuestionController extends Controller
 {
@@ -14,7 +15,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view("questions.index", ["questions" => Question::all()]);
+        return view("questions.index", ["questions" => Question::all(), "questionSections" =>  QuestionSection::all()]);
     }
 
     /**
@@ -22,7 +23,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        $questionSections = QuestionSection::all();
+        return view("questions.create", ["questionSections" => $questionSections]);
     }
 
     /**
@@ -30,7 +32,26 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        //
+        
+        $validatedData = $request->validate([
+            "question_text" => "required|string",
+            "question_section_id" => "required|exists:question_sections,id",
+            "answers" => "required|array|min:1",
+            "answers.*.answer_text" => "required|string",
+            "answers.*.is_correct" => "required",
+        ]);
+
+        $question = Question::create([
+            "question_text" => $validatedData["question_text"],
+            "question_section_id" => $validatedData["question_section_id"],
+            "created_by" => "1"
+        ]);
+
+        foreach ($validatedData["answers"] as $answerData) {
+            $question->answers()->create($answerData);
+        }
+
+        return redirect("/questions")->with(["success" => "Question Created Successfully!"]);
     }
 
     /**

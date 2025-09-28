@@ -11,7 +11,26 @@ class StoreQuestionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * This method is executed before the validation rules are checked.
+     */
+
+    protected function prepareForValidation(): void
+    {
+        $answers = $this->input('answers', []);
+
+        foreach ($answers as $index => $answer) {
+            $answers[$index]['is_correct'] = isset($answer['is_correct']) && $answer['is_correct'] === 'on';
+        }
+
+        $this->merge([
+            'answers' => $answers,
+        ]);
     }
 
     /**

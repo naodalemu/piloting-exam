@@ -15,7 +15,7 @@
                         @foreach ($question->answers as $index => $answer)
                             <li>
                                 <button
-                                    class="w-full text-left bg-gray-100 py-3 px-4 rounded-md hover:bg-indigo-100 hover:text-indigo-600">
+                                    class="w-full text-left bg-gray-100 py-3 px-4 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
                                     {{ $answer->answer_text }}
                                 </button>
                             </li>
