@@ -6,7 +6,8 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [QuestionSectionController::class, "index"]);
+Route::view("/", "welcome");
+Route::get('/exams', [QuestionSectionController::class, "index"]);
 Route::middleware("admin")->group(function () {
     Route::get('/create_question_section', [QuestionSectionController::class, "create"]);
     Route::post('/create_question_section', [QuestionSectionController::class, "store"]);

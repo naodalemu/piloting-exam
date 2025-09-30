@@ -1,4 +1,5 @@
-<x-layout sectionHeader="Question Sections">
+{{-- filepath: /home/naod/training_dev/airline-prep/resources/views/userQuestionSections/index.blade.php --}}
+<x-layout sectionHeader="User Exams">
     @if ($questionSections->isEmpty())
         <div class="h-50 w-full flex items-end justify-center text-gray-500">
             <p class="text-center max-w-lg">
@@ -15,15 +16,16 @@
             </p>
         </div>
     @else
-        <div class="bg-gray-100 py-4">
-            <ul class="space-y-4">
+        <div class="bg-gray-100 py-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($questionSections as $section)
-                    <a href="questions/{{ $section->id }}" class="p-6 bg-white shadow-md rounded-lg block">
-                        <h2 class="text-xl font-semibold text-gray-900">{{ $section->name }}</h2>
+                    <a href="questions/{{ $section->id }}"
+                        class="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow">
+                        <h2 class="text-lg font-semibold text-gray-900">{{ $section->name }}</h2>
                         <p class="text-gray-600 mt-2">{{ $section->description }}</p>
                     </a>
                 @endforeach
-            </ul>
+            </div>
         </div>
     @endif
 </x-layout>
