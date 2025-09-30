@@ -30,7 +30,7 @@
             <div>
                 <button type="submit"
                     class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-indigo-500">
-                    Register
+                    Login
                 </button>
             </div>
         </form>

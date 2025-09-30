@@ -23,7 +23,7 @@
                 @enderror
             </div>
 
-            <input type="text" hidden value="1" name="created_by" />
+            <input type="text" hidden value="{{ Auth::user()->id }}" name="created_by" />
 
             <div class="mt-6">
                 <button type="submit"

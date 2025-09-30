@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreQuestionSectionRequest;
 use App\Http\Requests\UpdateQuestionSectionRequest;
 use App\Models\QuestionSection;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionSectionController extends Controller
@@ -14,7 +15,6 @@ class QuestionSectionController extends Controller
      */
     public function index()
     {
-        // dd(QuestionSection::all());
         return view("welcome", ["questionSections" => QuestionSection::all()]);
     }
 

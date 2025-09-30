@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function userAnswers() : HasMany {
         return $this->hasMany(UserAnswer::class);
     }
+
+    public function questionSections() : HasMany {
+        return $this->hasMany(QuestionSection::class, "created_by");
+    }
 }

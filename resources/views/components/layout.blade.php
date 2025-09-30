@@ -27,7 +27,7 @@
                                     class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">Sections</a>
                                 <a href="/questions"
                                     class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('questions') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">Questions</a>
-                                @if (Auth::user() && Auth::user()->role == "admin")
+                                @if (Auth::check() && Auth::user()->role == "admin")
                                     <a href="/create_question_section"
                                         class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('create_question_section') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">Create
                                         Section</a>
