@@ -17,7 +17,7 @@ class QuestionSectionController extends Controller
     {
         if (Auth::check() && Auth::user()->role === "admin") {
             return view("questionSections.index", ["questionSections" => QuestionSection::all()]);
-        } else if (Auth::check() && Auth::user()->role === "user") {
+        } else {
             return view("userQuestionSections.index", ["questionSections" => QuestionSection::all()]);
         }
     }
@@ -53,7 +53,7 @@ class QuestionSectionController extends Controller
     {
         if (Auth::check() && Auth::user()->role === "admin") {
             return view("questionSections.show", ["questionSection" => $questionSection, "questions" => $questionSection->questions]);
-        } else if (Auth::check() && Auth::user()->role === "user") {
+        } else {
             return view("userQuestionSections.show", ["questionSection" => $questionSection, "questions" => $questionSection->questions]);
         }
     }

@@ -1,4 +1,4 @@
-<x-layout :header="false">
+<x-layout :header="false" :paddings="false">
     <div class="bg-gray-50 text-gray-800">
         <!-- Hero Section -->
         <main>
@@ -9,8 +9,8 @@
                         alt="Airplane cockpit view" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gray-900 bg-opacity-60"></div>
                 </div>
-                <div class="relative flex items-center justify-center min-h-screen px-4 py-24 sm:px-6 lg:px-8">
-                    <div class="max-w-2xl mx-auto text-center">
+                <div class="relative flex justify-center min-h-screen px-4 py-24 sm:px-6 lg:px-8">
+                    <div class="max-w-2xl mx-auto text-center mt-32">
                         <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
                             Welcome to Airline Prep
                         </h1>
