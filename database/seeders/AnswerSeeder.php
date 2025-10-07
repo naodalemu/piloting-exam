@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Answer;
+use App\Models\Question;
+use App\Models\QuestionSection;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +16,8 @@ class AnswerSeeder extends Seeder
      */
     public function run(): void
     {
-        Answer::factory(3)->create();
+        QuestionSection::factory(3)->create();
+        Question::factory(30)->create();
+        Answer::factory(120)->create();
     }
 }
