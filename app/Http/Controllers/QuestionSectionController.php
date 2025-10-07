@@ -15,7 +15,11 @@ class QuestionSectionController extends Controller
      */
     public function index()
     {
-        return view("welcome", ["questionSections" => QuestionSection::all()]);
+        if (Auth::check() && Auth::user()->role === "admin") {
+            return view("questionSections.index", ["questionSections" => QuestionSection::all()]);
+        } else {
+            return view("userQuestionSections.index", ["questionSections" => QuestionSection::all()]);
+        }
     }
 
     /**
@@ -47,14 +51,11 @@ class QuestionSectionController extends Controller
      */
     public function show(QuestionSection $questionSection)
     {
-        foreach ($questionSection->questions as $index => $question) {
-            foreach ($question->answers as $index => $answers) {
-                
-            }
+        if (Auth::check() && Auth::user()->role === "admin") {
+            return view("questionSections.show", ["questionSection" => $questionSection, "questions" => $questionSection->questions]);
+        } else {
+            return view("userQuestionSections.show", ["questionSection" => $questionSection, "questions" => $questionSection->questions]);
         }
-
-        // dd($questionSection->questions[0]->answers);
-        return view("questionSections.index", ["questionSection" => $questionSection, "questions" => $questionSection->questions]);
     }
 
     /**
