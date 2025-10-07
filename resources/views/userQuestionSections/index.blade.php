@@ -21,6 +21,7 @@
                 @foreach ($questionSections as $section)
                     <a href="questions/{{ $section->id }}"
                         class="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow">
+                        <p class="text-indigo-600 my-4 font-semibold">Score: {{ $scores[$section->id] }}</p>
                         <h2 class="text-lg font-semibold text-gray-900">{{ $section->name }}</h2>
                         <p class="text-gray-600 mt-2">{{ $section->description }}</p>
                     </a>
