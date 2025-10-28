@@ -4,6 +4,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionSectionController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserAnswerController;
 use Illuminate\Support\Facades\Route;
 
 Route::view("/", "welcome");
@@ -14,6 +15,10 @@ Route::middleware("admin")->group(function () {
     Route::get("/create_question", [QuestionController::class, "create"]);
     Route::post("/create_question", [QuestionController::class, "store"]);
 });
+
+
+
+Route::post("/user-answers", [UserAnswerController::class, "store"])->middleware('auth');
 
 Route::get("/questions", [QuestionController::class, "index"]);
 Route::get("/questions/{questionSection}", [QuestionSectionController::class, "show"]);

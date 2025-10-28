@@ -6,6 +6,7 @@ use App\Http\Requests\StoreQuestionSectionRequest;
 use App\Http\Requests\UpdateQuestionSectionRequest;
 use App\Models\QuestionSection;
 use App\Models\User;
+use App\Models\UserAnswer;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionSectionController extends Controller
@@ -15,10 +16,32 @@ class QuestionSectionController extends Controller
      */
     public function index()
     {
+        $questionSections = QuestionSection::all();
+        $scores = [];
+
+        foreach ($questionSections as $section) {
+            $totalQuestions = $section->questions()->count();
+
+            // Get the latest answers for the user in this section
+            $latestAnswers = UserAnswer::whereIn('question_id', $section->questions->pluck('id'))
+                ->where('user_id', Auth::id())
+                ->orderBy('created_at', 'desc') // Ensure the latest answers are retrieved
+                ->get()
+                ->unique('question_id'); // Only keep the latest answer for each question
+
+            // Calculate the number of correct answers
+            $correctAnswers = $latestAnswers->filter(function ($answer) {
+                return $answer->is_correct;
+            })->count();
+
+            // Store the score as "correct/total"
+            $scores[$section->id] = "{$correctAnswers}/{$totalQuestions}";
+        }
+
         if (Auth::check() && Auth::user()->role === "admin") {
-            return view("questionSections.index", ["questionSections" => QuestionSection::all()]);
+            return view("questionSections.index", ["questionSections" => $questionSections]);
         } else {
-            return view("userQuestionSections.index", ["questionSections" => QuestionSection::all()]);
+            return view("userQuestionSections.index", ["questionSections" => $questionSections, "scores" => $scores]);
         }
     }
 
