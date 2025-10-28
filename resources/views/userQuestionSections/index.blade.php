@@ -1,4 +1,3 @@
-{{-- filepath: /home/naod/training_dev/airline-prep/resources/views/userQuestionSections/index.blade.php --}}
 <x-layout sectionHeader="Exams">
     @if ($questionSections->isEmpty())
         <div class="h-50 w-full flex items-end justify-center text-gray-500">
