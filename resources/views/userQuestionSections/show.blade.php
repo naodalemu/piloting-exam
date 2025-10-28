@@ -79,17 +79,25 @@
                     <div
                         class="px-6 py-4 bg-gray-50 rounded-b-2xl border-t border-gray-200 flex justify-between items-center">
                         <button id="prev-btn"
-                            class="px-6 py-2 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                            class="px-6 py-2 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
                             Previous
                         </button>
                         <button id="next-btn"
-                            class="px-6 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50">
+                            class="px-6 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 cursor-pointer">
                             Next
                         </button>
-                        <button id="submit-btn"
-                            class="hidden px-6 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700">
-                            Submit Exam
-                        </button>
+                        @auth
+                            <button id="submit-btn"
+                                class="hidden px-6 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 cursor-pointer">
+                                Submit Exam
+                            </button>
+                        @endauth
+                        @guest
+                            <a id="login-text" href="/login"
+                                class="hidden px-6 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 cursor-pointer">
+                                Login to Submit
+                            </a>
+                        @endguest
                     </div>
                 </div>
                 <!-- Submission Status Message -->
@@ -120,6 +128,7 @@
                 const prevBtn = document.getElementById('prev-btn');
                 const nextBtn = document.getElementById('next-btn');
                 const submitBtn = document.getElementById('submit-btn');
+                const loginText = document.getElementById('login-text');
                 const progressDots = document.querySelectorAll('.progress-dot');
                 const submissionStatus = document.getElementById('submission-status');
                 const confirmationModal = document.getElementById('confirmation-modal');
@@ -145,10 +154,12 @@
 
                     if (index === questions.length - 1) {
                         nextBtn.classList.add('hidden');
-                        submitBtn.classList.remove('hidden');
+                        submitBtn?.classList.remove('hidden');
+                        loginText?.classList.remove('hidden');
                     } else {
                         nextBtn.classList.remove('hidden');
-                        submitBtn.classList.add('hidden');
+                        submitBtn?.classList.add('hidden');
+                        loginText?.classList.add('hidden');
                     }
                 }
 
@@ -268,7 +279,7 @@
                     }
                 }
 
-                submitBtn.addEventListener('click', (e) => {
+                submitBtn?.addEventListener('click', (e) => {
                     e.preventDefault();
                     const totalQuestions = questions.length;
                     const answeredQuestions = Object.keys(userAnswers).length;
